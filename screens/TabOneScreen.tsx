@@ -7,10 +7,7 @@ import { RootTabScreenProps } from '../types';
 import { createTable, insert, select } from '../helpers/sqlite';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-  createTable(); // 「sample_table」というテーブル作成
-  insert(1, "Taro"); // 「id=1, name=Taro」のデータを登録
-  insert(2, "Jiro"); // 「id=2, name=Jiro」のデータを登録
-  select(); // データを取得してログに表示
+  createTable(); // 「diaries」というテーブル作成
 
   return (
     <View style={styles.container}>
