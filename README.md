@@ -7,6 +7,8 @@
 | SQLiteのインストール | installexposqlite  |
 | SQLiteでサンプルSQLを流す | sqlitesample  |
 | diariesテーブルの作成 | create-diaries-table |
+| firebaseの準備 | firebase-init |
+| firebaseから絵文字を取得 | get-emoji |
 
 ## バージョン情報
 - ReactNative: 0.70.6
