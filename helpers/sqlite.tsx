@@ -1,11 +1,9 @@
 import * as SQLite from "expo-sqlite";
 
-
 /**
  * SQLiteと接続
  */
-const db = SQLite.openDatabase("db");
-
+const db = SQLite.openDatabase("tapdiary");
 
 /**
  * テーブルを作成する
@@ -14,7 +12,14 @@ export function createTable() {
   db.transaction((tx) => {
     tx.executeSql(
       // 実行したいSQL文
-      `create table if not exists sample_table (id integer primary key not null, name text);`,
+      `CREATE TABLE if not exists diaries (
+        id integer primary key not null,
+        body text,
+        emoji text,
+        feel_id text,
+        updated_at text,
+        created_at text 
+      );`,
       // SQL文の引数
       // 必要ないときは空のまま
       [],
