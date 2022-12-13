@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet, FlatList } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,7 +8,7 @@ import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
 
 export default function TabTwoScreen() {
-
+  const [feels, setFeels] = useState([]);
   // 日記作成スクリーンが起動した時、1度だけ絵文字を取得する
   useEffect( () =>{
     // firestoreから取ってくる処理
@@ -23,16 +23,24 @@ export default function TabTwoScreen() {
     querySnapshot.forEach((doc) => {
       console.log(doc.data())
       // doc.data() is never undefined for query doc snapshots
-      // let array: string[] = doc.data();
-      // array['id'] = doc.id;
-      // tmpFeels.push(array);
+      let array: string[] = doc.data();
+      array['id'] = doc.id;
+      tmpFeels.push(array);
     });
-    // return tmpFeels;
+    setFeels(tmpFeels);
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
+      <FlatList
+        data={feels}
+        horizontal={true}
+        renderItem={({item}) => 
+          <Text>{item.emoji + "\n" + item.name}</Text>
+        }
+        // keyExtractor={item => item.id}
+      />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
     </View>
