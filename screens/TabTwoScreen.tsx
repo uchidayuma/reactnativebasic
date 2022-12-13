@@ -1,9 +1,35 @@
+import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
+import { query, collection, getDocs } from 'firebase/firestore';
+import { firestore } from '../helpers/firebase';
+
 export default function TabTwoScreen() {
+
+  // 日記作成スクリーンが起動した時、1度だけ絵文字を取得する
+  useEffect( () =>{
+    // firestoreから取ってくる処理
+    getEmojies();
+  }, [])
+  // 第2引数にから配列を入れると1度だけ実行
+
+  const getEmojies = async() => {
+    const q = query(collection(firestore, "feels"));
+    let tmpFeels: string[] = [];
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data())
+      // doc.data() is never undefined for query doc snapshots
+      // let array: string[] = doc.data();
+      // array['id'] = doc.id;
+      // tmpFeels.push(array);
+    });
+    // return tmpFeels;
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
