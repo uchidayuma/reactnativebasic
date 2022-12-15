@@ -18,6 +18,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | firebaseから絵文字を取得 | get-emoji |
 | 絵文字を表示 | render-emoji |
 | 日記本文入力フォームを作成する | input-button-form |
+| 日記本文を記入できるようにする | body-usestate |
 
 
 ## バージョン情報

@@ -9,6 +9,7 @@ import { firestore } from '../helpers/firebase';
 
 export default function TabTwoScreen() {
   const [feels, setFeels] = useState([]);
+  const [body, setBody] = useState('');
   // 日記作成スクリーンが起動した時、1度だけ絵文字を取得する
   useEffect( () =>{
     // firestoreから取ってくる処理
@@ -44,8 +45,9 @@ export default function TabTwoScreen() {
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <TextInput
         // style={styles.input}
-        // onChangeText={onChangeText}
-        value='diary body'
+        onChangeText={setBody}
+        value={body}
+        placeholder='diary content'
       />
       <Button
         title="Write Diary"
