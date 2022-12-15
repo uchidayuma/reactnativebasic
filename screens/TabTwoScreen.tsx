@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, FlatList, TextInput, Button, Alert } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
+import { db, insertDiary } from '../helpers/sqlite';
 
 export default function TabTwoScreen() {
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
+  const [selectedTemplate, setSelectedTemplate] = useState({});
   const [templates, setTemplates] = useState([]);
   // 日記作成スクリーンが起動した時、1度だけ絵文字を取得する
   useEffect( () =>{
@@ -35,10 +36,15 @@ export default function TabTwoScreen() {
   const emojiPress = (name: string) => {
     const selectedEmoji: string[] = feels.find(v => v.name === name);
     // console.log(selectedEmoji);
+    setSelectedTemplate(selectedEmoji);
     setTemplates(selectedEmoji.templates);
   }
   const templatePress = (template: string) => {
     setBody(template);
+  }
+  const onSubmit = () => {
+    console.log(body, selectedTemplate);
+    insertDiary(db, body, selectedTemplate);
   }
 
   return (
@@ -67,7 +73,7 @@ export default function TabTwoScreen() {
       />
       <Button
         title="Write Diary"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => onSubmit()}
       />
     </View>
   );

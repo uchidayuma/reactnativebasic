@@ -1,9 +1,9 @@
 import * as SQLite from "expo-sqlite";
-
+import dayjs from "dayjs";
 /**
  * SQLiteと接続
  */
-const db = SQLite.openDatabase("tapdiary");
+export const db = SQLite.openDatabase("tapdiary");
 
 /**
  * テーブルを作成する
@@ -47,7 +47,7 @@ export const insertDiary = (db: object = {}, body: string = '', selectedTemplate
       // ?のところに引数で設定した値が順番に入る
       `INSERT INTO diaries (body, emoji, feel_id, created_at, updated_at) values (?, ?, ? ,?, ?);`,
       // SQL文の引数
-      [body, selectedTemplate.emoji, selectedTemplate.feel_id , createdAt, createdAt],
+      [body, selectedTemplate.emoji, selectedTemplate.id , createdAt, createdAt],
       // 成功時のコールバック関数
       (sqlTxn, res) => {
         console.log(sqlTxn);
@@ -89,11 +89,12 @@ export function insert(id, name) {
 
 /**
  * データを取得する
+ */
 export function select() {
   db.transaction((tx) => {
     tx.executeSql(
       // 実行したいSQL文
-      `select * from sample_table;`,
+      `select * from diaries;`,
       // SQL文の引数
       [],
       // 成功時のコールバック関数
@@ -109,4 +110,3 @@ export function select() {
     );
   });
 }
- */
