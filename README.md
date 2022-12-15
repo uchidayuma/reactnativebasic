@@ -21,6 +21,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 日記本文を記入できるようにする | body-usestate |
 | 絵文字をタップした際の動きを作る | emojitap |
 | テンプレートをタップした際の動きを作る | template-tap |
+| インサート文の解説 | insert-sqlite |
+| SQLiteに日記内容を保存する | save-diary |
 
 
 ## バージョン情報

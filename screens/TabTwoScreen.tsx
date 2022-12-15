@@ -6,7 +6,6 @@ import { Text, View } from '../components/Themed';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
-import { template } from '@babel/core';
 
 export default function TabTwoScreen() {
   const [feels, setFeels] = useState([]);
