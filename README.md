@@ -20,6 +20,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 日記本文入力フォームを作成する | input-button-form |
 | 日記本文を記入できるようにする | body-usestate |
 | 絵文字をタップした際の動きを作る | emojitap |
+| テンプレートをタップした際の動きを作る | template-tap |
 
 
 ## バージョン情報
