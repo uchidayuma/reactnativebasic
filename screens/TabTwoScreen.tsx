@@ -38,6 +38,9 @@ export default function TabTwoScreen() {
     // console.log(selectedEmoji);
     setTemplates(selectedEmoji.templates);
   }
+  const templatePress = (template: string) => {
+    setBody(template);
+  }
 
   return (
     <View style={styles.container}>
@@ -53,7 +56,7 @@ export default function TabTwoScreen() {
       <FlatList
         data={templates}
         renderItem={({item}) => 
-          <Text>{item}</Text>
+          <Text onPress={() => templatePress(item)}>{item}</Text>
         }
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
