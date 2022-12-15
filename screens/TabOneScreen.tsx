@@ -8,7 +8,8 @@ import { createTable, insert, select } from '../helpers/sqlite';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   createTable(); // 「diaries」というテーブル作成
-
+  select();
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>
