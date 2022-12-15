@@ -6,10 +6,12 @@ import { Text, View } from '../components/Themed';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
+import { template } from '@babel/core';
 
 export default function TabTwoScreen() {
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
+  const [templates, setTemplates] = useState([]);
   // 日記作成スクリーンが起動した時、1度だけ絵文字を取得する
   useEffect( () =>{
     // firestoreから取ってくる処理
@@ -31,6 +33,12 @@ export default function TabTwoScreen() {
     setFeels(tmpFeels);
   }
 
+  const emojiPress = (name: string) => {
+    const selectedEmoji: string[] = feels.find(v => v.name === name);
+    // console.log(selectedEmoji);
+    setTemplates(selectedEmoji.templates);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
@@ -38,9 +46,15 @@ export default function TabTwoScreen() {
         data={feels}
         horizontal={true}
         renderItem={({item}) => 
-          <Text>{item.emoji + "\n" + item.name}</Text>
+          <Text onPress={() => emojiPress(item.name)}>{item.emoji + "\n" + item.name}</Text>
         }
-        // keyExtractor={item => item.id}
+      />
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <FlatList
+        data={templates}
+        renderItem={({item}) => 
+          <Text>{item}</Text>
+        }
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <TextInput
