@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -11,10 +11,24 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   select();
   
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
+    <ScrollView>
+      {/* HTMLで言うと、Sectionや/DIVタグに近い */}
+      <View>
+        <Text style={styles.title}>Welcomeパネル</Text>
+      </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-    </View>
+      <Text style={styles.title}>Past Diaries</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Text style={styles.title}>Diary Tips</Text>
+      <View>
+        <View>
+          <Text>Tips1</Text>
+        </View>
+        <View>
+          <Text>Tips2</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
