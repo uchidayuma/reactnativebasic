@@ -1,14 +1,30 @@
 import { StyleSheet, ScrollView } from 'react-native';
+import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
-import { createTable, insert, select } from '../helpers/sqlite';
+import { createTable, select } from '../helpers/sqlite';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   createTable(); // 「diaries」というテーブル作成
-  select();
+  const [diaries, setDiaries] = useState([])
+  useEffect( () =>{
+    console.log('useEffect: Home')
+    // SQLiteから取ってくる処理
+    init();
+  }, [])
+
+  const init = async() => {
+    // SQLiteから最新日記5件を取ってくる
+    // awaitを使って、日記がDBから取れる待つ
+    const results: string[] = await select();
+    // 取れたデータをStateにセット
+    await setDiaries(results);
+    console.log('diaries: state');
+    console.log(diaries);
+  }
   
   return (
     <ScrollView>
