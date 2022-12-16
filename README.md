@@ -30,6 +30,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | HOME画面の開発 |  |
 | Viewで枠組みを作る | home-init |
 | useEffectで日記一覧を取得 | get-diaries |
+| 日記一覧を表示 | home-render-diaries |
 
 
 ## バージョン情報

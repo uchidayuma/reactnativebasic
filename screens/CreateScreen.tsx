@@ -24,7 +24,6 @@ export default function CreateScreen() {
     let tmpFeels: string[] = [];
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.data())
       // doc.data() is never undefined for query doc snapshots
       let array: string[] = doc.data();
       array['id'] = doc.id;
@@ -43,7 +42,6 @@ export default function CreateScreen() {
     setBody(template);
   }
   const onSubmit = () => {
-    console.log(body, selectedTemplate);
     insertDiary(db, body, selectedTemplate);
   }
 

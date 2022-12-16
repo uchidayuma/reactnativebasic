@@ -91,22 +91,26 @@ export function insert(id, name) {
  * データを取得する
  */
 export function select() {
-  db.transaction((tx) => {
-    tx.executeSql(
-      // 実行したいSQL文
-      `select * from diaries;`,
-      // SQL文の引数
-      [],
-      // 成功時のコールバック関数
-      (_, { rows }) => {
-        console.log("select success");
-        console.log("select result:" + JSON.stringify(rows._array));
-      },
-      () => {
-        // 失敗時のコールバック関数
-        console.log("select faile");
-        return false;
-      }
-    );
-  });
+  return new Promise((resolve, reject) =>{
+    db.transaction((tx) => {
+      tx.executeSql(
+        // 実行したいSQL文
+        `select * from diaries order by id desc limit 5;`,
+        // SQL文の引数
+        [],
+        // 成功時のコールバック関数
+        (_, { rows }) => {
+          console.log("select success");
+          console.log("select result:" + JSON.stringify(rows._array));
+          resolve(rows._array);
+        },
+        (error) => {
+          // 失敗時のコールバック関数
+          console.log("select faile");
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  })
 }
