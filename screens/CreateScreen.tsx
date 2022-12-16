@@ -7,7 +7,7 @@ import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
 import { db, insertDiary } from '../helpers/sqlite';
 
-export default function TabTwoScreen() {
+export default function CreateScreen() {
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState({});
