@@ -7,6 +7,8 @@ import { RootTabScreenProps } from '../types';
 
 import { createTable, select } from '../helpers/sqlite';
 
+import { Diaries } from '../components/Diaries';
+
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   createTable(); // 「diaries」というテーブル作成
   const [diaries, setDiaries] = useState([])
@@ -34,6 +36,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text style={styles.title}>Past Diaries</Text>
+      <Diaries items={diaries} />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text style={styles.title}>Diary Tips</Text>
       <View>
