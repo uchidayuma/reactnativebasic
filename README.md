@@ -28,7 +28,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | タブの名前とアイコンを変更 | bottom-navigation |
 | 共通ヘッダーの開発 | share-header |
 | HOME画面の開発 |  |
-| Viewの設置 | home-init |
+| Viewで枠組みを作る | home-init |
+| useEffectで日記一覧を取得 | get-diaries |
 
 
 ## バージョン情報
