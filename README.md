@@ -26,6 +26,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | SQLiteに日記内容を保存する | save-diary |
 | タブメニューを改良 |  |
 | タブの名前とアイコンを変更 | bottom-navigation |
+| 共通ヘッダーの開発 | share-header |
 | HOME画面の開発 |  |
 | Viewの設置 | home-init |
 
