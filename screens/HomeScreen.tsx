@@ -1,4 +1,5 @@
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Image } from 'react-native';
+import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -32,7 +33,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     <ScrollView>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
       <View>
-        <Text style={styles.title}>Welcomeパネル</Text>
+        <Image source={require('../assets/images/welcome.png')} />
+        <Text>2022-12-18</Text>
+        <Text style={styles.title}>Good After Noon</Text>
+        <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
       </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text style={styles.title}>Past Diaries</Text>
