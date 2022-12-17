@@ -32,6 +32,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | useEffectで日記一覧を取得 | get-diaries |
 | 日記一覧を表示 | home-render-diaries |
 | 日記作成画面に移動するボタンを設置 | navigate-create |
+| 日記作成が完了したらホーム画面に戻す | return-home |
+| 引っ張って更新を実装 | pull-refresh |
 
 
 ## バージョン情報
