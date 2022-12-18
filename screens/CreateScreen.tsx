@@ -7,7 +7,9 @@ import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
 import { db, insertDiary } from '../helpers/sqlite';
 
-export default function CreateScreen() {
+import { RootTabScreenProps } from '../types';
+
+export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'>) {
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState({});
@@ -43,6 +45,13 @@ export default function CreateScreen() {
   }
   const onSubmit = () => {
     insertDiary(db, body, selectedTemplate);
+    Alert.alert(
+      "Tap Diary",
+      "Diary wrote",
+      [
+        { text: "OK", onPress: () => navigation.navigate('Home') }
+      ]
+    );
   }
 
   return (
