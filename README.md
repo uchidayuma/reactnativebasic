@@ -35,6 +35,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 日記作成が完了したらホーム画面に戻す | return-home |
 | 引っ張って更新を実装 | pull-refresh |
 | 時刻関係の機能を実装 | home-dayjs |
+| Webviewを実装 | home-webview |
 
 
 ## バージョン情報
