@@ -1,6 +1,7 @@
 import { StyleSheet, ScrollView, Image, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
+
 import dayjs from 'dayjs';
 
 import { Text, View } from '../components/Themed';
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFF'
   },
   title: {
     fontSize: 20,
