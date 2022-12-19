@@ -36,6 +36,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 引っ張って更新を実装 | pull-refresh |
 | 時刻関係の機能を実装 | home-dayjs |
 | Webviewを実装 | home-webview |
+| 【Section】ダークモードに対応したCSSの仕組みを作ろう |  |
 
 
 ## バージョン情報

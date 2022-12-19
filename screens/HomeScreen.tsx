@@ -54,11 +54,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Text style={styles.title}>Diary Tips</Text>
       <View>
-        <View>
-          <Text>Tips1</Text>
+        <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
+          <Image source={require('../assets/images/tips1.png')} />
+          <Text>App Philosophy</Text>
         </View>
-        <View>
-          <Text>Tips2</Text>
+        <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/about-2/'})}>
+          <Image source={require('../assets/images/tips2.png')} />
+          <Text>Diary Benefits</Text>
         </View>
       </View>
     </ScrollView>
