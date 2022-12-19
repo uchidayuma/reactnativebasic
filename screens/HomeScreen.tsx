@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Image } from 'react-native';
+import { StyleSheet, ScrollView, Image, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 
@@ -12,7 +12,8 @@ import { Diaries } from '../components/Diaries';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   createTable(); // 「diaries」というテーブル作成
-  const [diaries, setDiaries] = useState([])
+  const [diaries, setDiaries] = useState([]);
+  const [refreshing, setRefreshing] = useState(true);
   useEffect( () =>{
     console.log('useEffect: Home')
     // SQLiteから取ってくる処理
@@ -25,12 +26,17 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     const results: string[] = await select();
     // 取れたデータをStateにセット
     await setDiaries(results);
+    setRefreshing(false);
     console.log('diaries: state');
     console.log(diaries);
   }
   
   return (
-    <ScrollView>
+    <ScrollView 
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={init} />
+      }
+    >
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
       <View>
         <Image source={require('../assets/images/welcome.png')} />

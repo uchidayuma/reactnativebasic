@@ -13,7 +13,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 完成版 | basic-master |
 | SQLiteのインストール | installexposqlite  |
 | SQLiteでサンプルSQLを流す | sqlitesample  |
-| 日記作成機能の開発 |  |
+| 【Section】日記作成機能の開発 |  |
 | diariesテーブルの作成 | create-diaries-table |
 | firebaseの準備 | firebase-init |
 | firebaseから絵文字を取得 | get-emoji |
@@ -24,16 +24,17 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | テンプレートをタップした際の動きを作る | template-tap |
 | インサート文の解説 | insert-sqlite |
 | SQLiteに日記内容を保存する | save-diary |
-| タブメニューを改良 |  |
+| 【Section】タブメニューを改良 |  |
 | タブの名前とアイコンを変更 | bottom-navigation |
 | 共通ヘッダーの開発 | share-header |
-| HOME画面の開発 |  |
+| 【Section】HOME画面の開発 |  |
 | Viewで枠組みを作る | home-init |
 | useEffectで日記一覧を取得 | get-diaries |
 | 日記一覧を表示 | home-render-diaries |
 | 日記作成画面に移動するボタンを設置 | navigate-create |
 | 日記作成が完了したらホーム画面に戻す | return-home |
 | 引っ張って更新を実装 | pull-refresh |
+| 時刻関係の機能を実装 | home-dayjs |
 
 
 ## バージョン情報
