@@ -1,19 +1,21 @@
 import { StyleSheet, ScrollView, Image, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 import { createTable, select } from '../helpers/sqlite';
 
 import { Diaries } from '../components/Diaries';
+import { hourMessage } from '../helpers/fuctions';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   createTable(); // 「diaries」というテーブル作成
   const [diaries, setDiaries] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
+  const welcomeMessage: string = hourMessage();
   useEffect( () =>{
     console.log('useEffect: Home')
     // SQLiteから取ってくる処理
@@ -30,6 +32,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     console.log('diaries: state');
     console.log(diaries);
   }
+
+  console.log(dayjs().format('H'))
   
   return (
     <ScrollView 
@@ -40,8 +44,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
       <View>
         <Image source={require('../assets/images/welcome.png')} />
-        <Text>2022-12-18</Text>
-        <Text style={styles.title}>Good After Noon</Text>
+        <Text>{ dayjs().format('YYYY-MM-DD')}</Text>
+        <Text style={styles.title}>{welcomeMessage}</Text>
         <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
       </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
