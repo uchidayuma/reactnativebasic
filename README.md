@@ -37,6 +37,9 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 時刻関係の機能を実装 | home-dayjs |
 | Webviewを実装 | home-webview |
 | 【Section】ダークモードに対応したCSSの仕組みを作ろう |  |
+| カラー定義を変更 | constants-color |
+| Appbarのカラーを変更 | appbar-color |
+| 共通CSSの作成 | global-css |
 
 
 ## バージョン情報
