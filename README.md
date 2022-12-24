@@ -42,6 +42,9 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 共通CSSの作成 | global-css |
 | 【Section】Home画面のレイアウトを整えよう |  |
 | AIに背景イメージを作ってもらう | image-bg |
+| Welcomeパネルを整える | welcome-panel |
+| 日記一覧を整える | diaries-css |
+| Tipsを整える | tips-css |
 
 
 ## バージョン情報

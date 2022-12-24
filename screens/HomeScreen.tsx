@@ -2,6 +2,8 @@ import { StyleSheet, ScrollView, Image, ImageBackground, RefreshControl } from '
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import { gstyle } from '../constants/Styles';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 import dayjs from 'dayjs';
 
@@ -14,6 +16,31 @@ import { Diaries } from '../components/Diaries';
 import { hourMessage } from '../helpers/fuctions';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
+  const colorScheme = useColorScheme();
+  const styles = StyleSheet.create({
+    welcome: {
+      borderColor: '#FFF',
+      backgroundColor: Colors[colorScheme].backGroundColor,
+      // backgroundColor: Colors[light].backGroundColor,
+      marginTop: 20,
+      borderRadius: 10,
+      width: '80%',
+      marginHorizontal: '10%',
+      padding: 20
+    },
+    welcomeText: {
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    welcomeButton: {
+      backgroundColor: Colors[colorScheme].mainColor
+    },
+    separator: {
+      marginVertical: 30,
+      height: 1,
+      width: '80%',
+    },
+  });
   createTable(); // 「diaries」というテーブル作成
   const [diaries, setDiaries] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
@@ -45,11 +72,20 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     >
       <ImageBackground source={require('../assets/images/background2.jpeg')} resizeMode="cover" style={gstyle.bgimage}>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
-        <View>
-          <Image source={require('../assets/images/welcome.png')} />
-          <Text>{ dayjs().format('YYYY-MM-DD')}</Text>
-          <Text style={gstyle.heading}>{welcomeMessage}</Text>
-          <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
+        <View style={styles.welcome}>
+          <View style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'transparent',
+            marginBottom: 10
+          }}>
+            <Image source={require('../assets/images/welcome.png')} />
+          </View>
+          <Text style={styles.welcomeText}>{ dayjs().format('YYYY-MM-DD')}</Text>
+          <Text style={[styles.welcomeText, gstyle.heading]}>{welcomeMessage}</Text>
+          <Button icon="note" mode="contained" buttonColor={Colors[colorScheme].mainColor} onPress={() => navigation.navigate('Create')}>Check In</Button>
         </View>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
         <Text style={gstyle.heading}>Past Diaries</Text>
@@ -71,20 +107,3 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF'
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
