@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Image, RefreshControl } from 'react-native';
+import { StyleSheet, ScrollView, Image, ImageBackground, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import { gstyle } from '../constants/Styles';
@@ -43,28 +43,30 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
         <RefreshControl refreshing={refreshing} onRefresh={init} />
       }
     >
+      <ImageBackground source={require('../assets/images/background2.jpeg')} resizeMode="cover" style={gstyle.bgimage}>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
-      <View>
-        <Image source={require('../assets/images/welcome.png')} />
-        <Text>{ dayjs().format('YYYY-MM-DD')}</Text>
-        <Text style={gstyle.heading}>{welcomeMessage}</Text>
-        <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
-      </View>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text style={gstyle.heading}>Past Diaries</Text>
-      <Diaries items={diaries} />
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text style={gstyle.heading}>Diary Tips</Text>
-      <View>
-        <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
-          <Image source={require('../assets/images/tips1.png')} />
-          <Text>App Philosophy</Text>
+        <View>
+          <Image source={require('../assets/images/welcome.png')} />
+          <Text>{ dayjs().format('YYYY-MM-DD')}</Text>
+          <Text style={gstyle.heading}>{welcomeMessage}</Text>
+          <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
         </View>
-        <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/about-2/'})}>
-          <Image source={require('../assets/images/tips2.png')} />
-          <Text>Diary Benefits</Text>
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+        <Text style={gstyle.heading}>Past Diaries</Text>
+        <Diaries items={diaries} />
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+        <Text style={gstyle.heading}>Diary Tips</Text>
+        <View>
+          <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
+            <Image source={require('../assets/images/tips1.png')} />
+            <Text>App Philosophy</Text>
+          </View>
+          <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/about-2/'})}>
+            <Image source={require('../assets/images/tips2.png')} />
+            <Text>Diary Benefits</Text>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
