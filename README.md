@@ -40,6 +40,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | カラー定義を変更 | constants-color |
 | Appbarのカラーを変更 | appbar-color |
 | 共通CSSの作成 | global-css |
+| 【Section】Home画面のレイアウトを整えよう |  |
 
 
 ## バージョン情報

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, FlatList, TextInput, Button, Alert } from 'react-native';
 
 import { Text, View } from '../components/Themed';
+import { gstyle } from '../constants/Styles';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
@@ -56,7 +57,7 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={gstyle.heading}>Dairy Create</Text>
       <FlatList
         data={feels}
         horizontal={true}
