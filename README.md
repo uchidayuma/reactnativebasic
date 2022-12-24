@@ -41,6 +41,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | Appbarのカラーを変更 | appbar-color |
 | 共通CSSの作成 | global-css |
 | 【Section】Home画面のレイアウトを整えよう |  |
+| AIに背景イメージを作ってもらう | image-bg |
 
 
 ## バージョン情報
