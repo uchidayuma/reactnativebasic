@@ -63,6 +63,12 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   }
 
   console.log(dayjs().format('H'))
+  const backgroundSource: string = colorScheme === 'dark' ? require('../assets/images/background2.jpeg') :  require('../assets/images/background3.jpeg'); 
+  // if(colorScheme === 'dark'){
+  //   backgroundSource = 星空の画像
+  // }else{
+  //   backgroundSource = 空の画像
+  // }
   
   return (
     <ScrollView
@@ -70,7 +76,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
         <RefreshControl refreshing={refreshing} onRefresh={init} />
       }
     >
-      <ImageBackground source={require('../assets/images/background2.jpeg')} resizeMode="cover" style={gstyle.bgimage}>
+      <ImageBackground source={backgroundSource} resizeMode="cover" style={gstyle.bgimage}>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
         <View style={styles.welcome}>
           <View style={{

@@ -1,10 +1,13 @@
 import { StyleSheet, View, Text } from "react-native"
-
+import useColorScheme from "../hooks/useColorScheme";
+import Colors from '../constants/Colors';
 
 export const Diaries = (props: any) => {
+  const colorScheme = useColorScheme();
   const styles = StyleSheet.create({
     time: {
       fontSize: 14,
+      color: Colors[colorScheme].text
     },
     container: {
       flex: 1,
@@ -18,6 +21,7 @@ export const Diaries = (props: any) => {
     },
     body: {
       fontSize: 18,
+      color: Colors[colorScheme].text
     }
   });
   const items: string[] = props.items.map((item: {})=> {
