@@ -1,6 +1,7 @@
 import { StyleSheet, ScrollView, Image, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
+import { gstyle } from '../constants/Styles';
 
 import dayjs from 'dayjs';
 
@@ -37,7 +38,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   console.log(dayjs().format('H'))
   
   return (
-    <ScrollView 
+    <ScrollView
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={init} />
       }
@@ -46,14 +47,14 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       <View>
         <Image source={require('../assets/images/welcome.png')} />
         <Text>{ dayjs().format('YYYY-MM-DD')}</Text>
-        <Text style={styles.title}>{welcomeMessage}</Text>
+        <Text style={gstyle.heading}>{welcomeMessage}</Text>
         <Button icon="note" mode="contained" onPress={() => navigation.navigate('Create')}>Check In</Button>
       </View>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text style={styles.title}>Past Diaries</Text>
+      <Text style={gstyle.heading}>Past Diaries</Text>
       <Diaries items={diaries} />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Text style={styles.title}>Diary Tips</Text>
+      <Text style={gstyle.heading}>Diary Tips</Text>
       <View>
         <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
           <Image source={require('../assets/images/tips1.png')} />
