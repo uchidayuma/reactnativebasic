@@ -11,6 +11,25 @@ import { db, insertDiary } from '../helpers/sqlite';
 import { RootTabScreenProps } from '../types';
 
 export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'>) {
+  const styles = StyleSheet.create({
+    flatlist:{
+      maxHeight: '40%',
+      width: '100%'
+    },
+    emoji: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      textAlign: 'center',
+      marginHorizontal: 25,
+      fontSize: 30
+    },
+    separator: {
+      marginVertical: 30,
+      height: 1,
+      width: '80%',
+    },
+  });
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState({});
@@ -56,13 +75,14 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
   }
 
   return (
-    <View style={styles.container}>
+    <View style={gstyle.bgimage}>
       <Text style={gstyle.heading}>Dairy Create</Text>
       <FlatList
+        style={styles.flatlist}
         data={feels}
         horizontal={true}
         renderItem={({item}) => 
-          <Text onPress={() => emojiPress(item.name)}>{item.emoji + "\n" + item.name}</Text>
+          <Text style={styles.emoji} onPress={() => emojiPress(item.name)}>{item.emoji + "\n" + item.name}</Text>
         }
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -86,20 +106,3 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
