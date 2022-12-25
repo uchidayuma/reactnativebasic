@@ -3,6 +3,8 @@ import { StyleSheet, FlatList, TextInput, Button, Alert } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { gstyle } from '../constants/Styles';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
@@ -11,6 +13,7 @@ import { db, insertDiary } from '../helpers/sqlite';
 import { RootTabScreenProps } from '../types';
 
 export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'>) {
+  const colorScheme = useColorScheme();
   const styles = StyleSheet.create({
     flatlist:{
       maxHeight: '40%',
@@ -22,13 +25,31 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
       justifyContent: 'space-between',
       textAlign: 'center',
       marginHorizontal: 25,
-      fontSize: 30
+      fontSize: 30,
+      color: Colors[colorScheme].text
     },
     separator: {
       marginVertical: 30,
       height: 1,
       width: '80%',
     },
+    templateList: {
+      // minHeight: '35%',
+      maxHeight: '40%',
+      width: '100%'
+    },
+    template: {
+      fontSize: 14,
+      lineHeight: 40,
+      color: Colors[colorScheme].text
+    },
+    input: {
+      fontSize: 14,
+      width: '90%',
+      marginHorizontal: '5%',
+      lineHeight: 30,
+      marginBottom: 30
+    }
   });
   const [feels, setFeels] = useState([]);
   const [body, setBody] = useState('');
@@ -87,16 +108,19 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <FlatList
+        style={styles.templateList}
         data={templates}
         renderItem={({item}) => 
-          <Text onPress={() => templatePress(item)}>{item}</Text>
+          <Text style={styles.template} onPress={() => templatePress(item)}>{item}</Text>
         }
       />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <TextInput
-        // style={styles.input}
+        style={styles.input}
         onChangeText={setBody}
         value={body}
+        multiline={true}
+        numberOfLines={3}
         placeholder='diary content'
       />
       <Button
