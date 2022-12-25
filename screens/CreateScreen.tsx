@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, FlatList, TextInput, Alert } from 'react-native';
+import { Button } from 'react-native-paper';
 
 import { Text, View } from '../components/Themed';
 import { gstyle } from '../constants/Styles';
@@ -48,7 +49,15 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
       width: '90%',
       marginHorizontal: '5%',
       lineHeight: 30,
-      marginBottom: 30
+      marginBottom: 30,
+      color: Colors[colorScheme].text
+    },
+    button: {
+      width: '50%',
+      marginHorizontal: '25%',
+      marginBottom: 40,
+      borderColor: Colors[colorScheme].text,
+      borderWidth: 1
     }
   });
   const [feels, setFeels] = useState([]);
@@ -93,6 +102,7 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
         { text: "OK", onPress: () => navigation.navigate('Home') }
       ]
     );
+    setBody('');
   }
 
   return (
@@ -123,10 +133,13 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
         numberOfLines={3}
         placeholder='diary content'
       />
-      <Button
-        title="Write Diary"
-        onPress={() => onSubmit()}
-      />
+      <Button style={styles.button} icon="pen" mode="contained"
+         buttonColor={Colors[colorScheme].accentColor}
+         labelStyle={ {fontSize: 20} }
+         disabled={body.length < 10}
+         onPress={() => onSubmit()}>
+          Write Diary
+      </Button>
     </View>
   );
 }
