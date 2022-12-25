@@ -40,6 +40,29 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       height: 1,
       width: '80%',
     },
+    tips: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      backgroundColor: 'transparent'
+    },
+    tipsCard: {
+      width: '40%',
+      padding: 15,
+      borderRadius: 15,
+      marginBottom: 20,
+      backgroundColor: Colors[colorScheme].backGroundColor
+    },
+    tipsImage:{
+      width: '80%',
+      marginHorizontal: '10%',
+      marginBottom: 10,
+    },
+    tipsText: {
+      color: Colors[colorScheme].text,
+      textAlign: 'center',
+    }
   });
   createTable(); // 「diaries」というテーブル作成
   const [diaries, setDiaries] = useState([]);
@@ -98,14 +121,14 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
         <Diaries items={diaries} />
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
         <Text style={gstyle.heading}>Diary Tips</Text>
-        <View>
-          <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
-            <Image source={require('../assets/images/tips1.png')} />
-            <Text>App Philosophy</Text>
+        <View style={styles.tips}>
+          <View style={styles.tipsCard} onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/we-philosophy/'})}>
+            <Image style={styles.tipsImage} source={require('../assets/images/tips1.png')} />
+            <Text style={styles.tipsText}>App Philosophy</Text>
           </View>
-          <View onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/about-2/'})}>
-            <Image source={require('../assets/images/tips2.png')} />
-            <Text>Diary Benefits</Text>
+          <View style={styles.tipsCard} onTouchEnd={ () => navigation.navigate('Webview', {url: 'https://tapdiary.net/about-2/'})}>
+            <Image style={styles.tipsImage} source={require('../assets/images/tips2.png')} />
+            <Text style={styles.tipsText}>Diary Benefits</Text>
           </View>
         </View>
       </ImageBackground>

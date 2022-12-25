@@ -45,6 +45,10 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | Welcomeパネルを整える | welcome-panel |
 | 日記一覧を整える | diaries-css |
 | Tipsを整える | tips-css |
+| 【Section】Create画面のレイアウトを整えよう |  |
+| 絵文字を整える | emoji-css |
+| テンプレートを整える | templates-css |
+| 全体を整えて仕上げる | create-finish-css |
 
 
 ## バージョン情報
