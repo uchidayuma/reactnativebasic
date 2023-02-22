@@ -52,7 +52,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 【Section】日記一覧画面を作成しよう |  |
 | 日記一覧を完成 | diary-index |
 | 【Section】GoogleAdmobを使ってマネタイズしよう |  |
-| 全体を整えて仕上げる | create-finish-css |
+| 広告コンポーネントの作成とビルド | admob-setting |
 
 
 ## バージョン情報
