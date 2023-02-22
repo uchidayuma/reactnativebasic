@@ -49,6 +49,10 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 絵文字を整える | emoji-css |
 | テンプレートを整える | templates-css |
 | 全体を整えて仕上げる | create-finish-css |
+| 【Section】日記一覧画面を作成しよう |  |
+| 日記一覧を完成 | diary-index |
+| 【Section】GoogleAdmobを使ってマネタイズしよう |  |
+| 全体を整えて仕上げる | create-finish-css |
 
 
 ## バージョン情報
