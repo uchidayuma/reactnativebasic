@@ -14,6 +14,7 @@ import { createTable, select } from '../helpers/sqlite';
 
 import { Diaries } from '../components/Diaries';
 import { hourMessage } from '../helpers/fuctions';
+import { Banner } from '../components/Banner';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const colorScheme = useColorScheme();
@@ -101,6 +102,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     >
       <ImageBackground source={backgroundSource} resizeMode="cover" style={gstyle.bgimage}>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
+        {/* <Banner/> */}
         <View style={styles.welcome}>
           <View style={{
             flex: 1,
