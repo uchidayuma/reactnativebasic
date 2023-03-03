@@ -5,7 +5,7 @@ import { BannerAd, BannerAdSize, TestIds } from "react-native-google-mobile-ads"
 export const Banner = () => {
 
   const productionID = Platform.select({
-    ios: "test",
+    ios: "ca-app-pub-2677960012216792/2559650898",
     android: "ca-app-pub-2677960012216792/2858421416"
   })
   
