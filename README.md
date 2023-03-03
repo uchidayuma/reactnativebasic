@@ -53,6 +53,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 日記一覧を完成 | diary-index |
 | 【Section】GoogleAdmobを使ってマネタイズしよう |  |
 | 広告コンポーネントの作成とビルド | admob-setting |
+| 広告付きiOSのテストビルド | ios-admob-build |
 
 
 ## バージョン情報
