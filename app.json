@@ -2,7 +2,7 @@
   "expo": {
     "name": "reactnative-demo",
     "slug": "reactnative-demo",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -19,14 +19,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.reactnativetest.yumaclass"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.alberorana.reactnativedemo"
+      "package": "com.reactnativetest.yumaclass"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -39,6 +40,6 @@
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-2677960012216792~5400824272",
-    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+    "ios_app_id": "ca-app-pub-2677960012216792~8973000095"
   }
 }
