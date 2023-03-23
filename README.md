@@ -54,6 +54,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 【Section】GoogleAdmobを使ってマネタイズしよう |  |
 | 広告コンポーネントの作成とビルド | admob-setting |
 | 広告付きiOSのテストビルド | ios-admob-build |
+| 【Section】STEP3本番ビルド |  |
+| iOS本番ビルド | ios-production-build |
 
 
 ## バージョン情報
