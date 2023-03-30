@@ -25,6 +25,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               CreateScreen: 'two',
             },
           },
+          Setting: {
+            screens: {
+              SettingScreen: 'three',
+            },
+          },
         },
       },
       Modal: 'modal',
