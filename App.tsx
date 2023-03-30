@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { useEffect } from 'react';
+import { Platform, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Appbar } from 'react-native-paper';
+import Purchases from 'react-native-purchases';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
@@ -21,6 +23,18 @@ export default function App() {
     }
   })
 
+  useEffect( () => {
+    rcinit();
+  }, [])
+
+  const rcinit = async () => {
+    if (Platform.OS === 'ios') {
+      await Purchases.configure({ apiKey: '' });
+    } else if (Platform.OS === 'android') {
+      await Purchases.configure({ apiKey: 'goog_QfyvSnfrGobMgexckUksOUkmRZG' });
+    }
+  }
+  
   if (!isLoadingComplete) {
     return null;
   } else {
