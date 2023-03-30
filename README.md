@@ -57,6 +57,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 【Section】STEP3本番ビルド |  |
 | iOS本番ビルド | ios-production-build |
 | 【Section】RevenueCatを利用してアプリ内課金を実装しよう |  |
+| RevenueCatの初期設定 | revenue-cat-init |
+| SettingScreenを作成 | create-setting-screen |
 | Androidでサブスク商品を取得 | google-play-subs |
 
 
