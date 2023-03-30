@@ -56,6 +56,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 広告付きiOSのテストビルド | ios-admob-build |
 | 【Section】STEP3本番ビルド |  |
 | iOS本番ビルド | ios-production-build |
+| 【Section】RevenueCatを利用してアプリ内課金を実装しよう |  |
+| Androidでサブスク商品を取得 | google-play-subs |
 
 
 ## バージョン情報
