@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
-import { getSubscriptionPlans } from '../helpers/billing';
+import { getSubscriptionPlans, purchaseSubscription } from '../helpers/billing';
 
 export const BillingModal = () => {
   const [visible, setVisible] = useState(false);
@@ -84,7 +84,7 @@ export const BillingModal = () => {
                 <Text style={styles.planPrice}>{plan.product.priceString}</Text>
                 <Text style={styles.planDescription}>{plan.product.description}</Text>
                 <TouchableOpacity style={styles.planButton}>
-                  <Text style={styles.planButtonText}>Purchase</Text>
+                  <Text style={styles.planButtonText} onPress={() => purchaseSubscription(plan)}>Purchase</Text>
                 </TouchableOpacity>
               </View>
           ))}
