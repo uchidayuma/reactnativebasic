@@ -60,6 +60,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | RevenueCatの初期設定 | revenue-cat-init |
 | SettingScreenを作成 | create-setting-screen |
 | Androidでサブスク商品を取得 | google-play-subs |
+| 【Android】でサブスクのテスト決済を行う | google-play-subs-test |
+| 決済モーダルのデザイン改良 | subs-modal-css |
 
 
 ## バージョン情報

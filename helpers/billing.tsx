@@ -1,6 +1,11 @@
 import Purchases from 'react-native-purchases';
+import Constants from 'expo-constants';
+import { dummyPlans } from '../constants/plans';
 
 export const getSubscriptionPlans = async () => {
+  if( Constants.appOwnership === 'expo' ) {
+    return dummyPlans;
+  }
   try {
     const offerings = await Purchases.getOfferings();
     if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {

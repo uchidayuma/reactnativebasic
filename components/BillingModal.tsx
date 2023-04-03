@@ -1,38 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import { Modal, Portal, Text, Button, Card, Title, Paragraph, Provider } from 'react-native-paper';
 
 import { getSubscriptionPlans, purchaseSubscription } from '../helpers/billing';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 export const BillingModal = () => {
+  const colorScheme = useColorScheme()
   const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
   const [plans, setPlans] = useState([]);
-  const containerStyle = {backgroundColor: 'white', padding: 20, width: '90%', marginHorizontal: '5%'};
+  const containerStyle = {backgroundColor: '#EEEEEE', padding: 20};
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      backgroundColor: '#555',
-    },
     title: {
       fontSize: 28,
       fontWeight: 'bold',
-      marginBottom: 30,
-      color: '#FEFEFE'
-    },
-    plansContainer: {
-      flexDirection: 'row',
+      marginBottom: 20,
+      color: Colors[colorScheme].text, 
     },
     plan: {
-      width: '40%',
+      width: '80%',
       backgroundColor: '#ffffff',
       borderRadius: 10,
       padding: 20,
-      marginHorizontal: 10,
+      marginHorizontal: '10%',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
@@ -40,33 +34,28 @@ export const BillingModal = () => {
       elevation: 5,
     },
     planTitle: {
-      fontSize: 22,
+      fontSize: 18,
       fontWeight: 'bold',
-      marginBottom: 10,
-    },
-    planPrice: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 10,
-    },
-    planDescription: {
-      fontSize: 16,
       marginBottom: 20,
     },
     planButton: {
-      backgroundColor: '#4b74ff',
+      color: Colors[colorScheme].text,
+      backgroundColor: Colors[colorScheme].mainColor,
       borderRadius: 5,
       paddingHorizontal: 15,
-      paddingVertical: 10,
+      paddingVertical: 5,
+      marginBottom: 20,
     },
     planButtonText: {
       color: '#ffffff',
       fontSize: 16,
+      marginBottom: 10,
     },
   });
 
   useEffect( () => {
     getSubscriptionPlans().then( (plans) => {
+      console.log(plans);
       setPlans(plans);
     });
   }, [])
@@ -74,22 +63,25 @@ export const BillingModal = () => {
   return (
     <Provider>
       <Portal>
-      <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-          {/* <View style={styles.container}> */}
-            <Text style={styles.title}>Premium Plan</Text>
-            <View style={styles.plansContainer}>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+          <View>
+            <Card style={styles.plan}>
+              <Card.Content>
+                <Title style={styles.title}>Premium Plan</Title>
+                <Paragraph style={styles.planTitle}>Please select a monthly or annual plan.</Paragraph>
+                <Paragraph style={styles.planTitle}>ADfree & Backup</Paragraph>
           {plans.map((plan) => (
-              <View style={styles.plan} key={plan.identifier}>
-                <Text style={styles.planTitle}>{plan.product.title}</Text>
-                <Text style={styles.planPrice}>{plan.product.priceString}</Text>
-                <Text style={styles.planDescription}>{plan.product.description}</Text>
-                <TouchableOpacity style={styles.planButton}>
-                  <Text style={styles.planButtonText} onPress={() => purchaseSubscription(plan)}>Purchase</Text>
+                <TouchableOpacity style={styles.planButton} onPress={() => purchaseSubscription(plan)}>
+                  <Text style={styles.planButtonText}>{plan.product.title}</Text>
+                  <Text style={[styles.planButtonText, {textAlign: 'center'}]}>{plan.product.priceString}</Text>
                 </TouchableOpacity>
-              </View>
           ))}
-            </View>
-          {/* </View> */}
+              </Card.Content>
+              <Card.Actions style={{ justifyContent: 'center', margin: 20 }}>
+                <Button onPress={hideModal}>Cancel</Button>
+              </Card.Actions>
+            </Card>
+          </View>
         </Modal>
       </Portal>
       <Button onPress={() => setVisible(true)}>Show</Button>
