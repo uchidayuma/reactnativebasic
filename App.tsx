@@ -29,7 +29,7 @@ export default function App() {
 
   const rcinit = async () => {
     if (Platform.OS === 'ios') {
-      await Purchases.configure({ apiKey: '' });
+      await Purchases.configure({ apiKey: 'appl_eCkJqfBdAKLdwrlUfRvlUSCBNeq' });
     } else if (Platform.OS === 'android') {
       await Purchases.configure({ apiKey: 'goog_QfyvSnfrGobMgexckUksOUkmRZG' });
     }
