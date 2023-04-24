@@ -62,6 +62,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | Androidでサブスク商品を取得 | google-play-subs |
 | 【Android】でサブスクのテスト決済を行う | google-play-subs-test |
 | 決済モーダルのデザイン改良 | subs-modal-css |
+| 【Section】firebaseによるユーザー管理 |  |
+| SignupとSigninスクリーンを作成 | create-signin-screen |
 
 
 ## バージョン情報
