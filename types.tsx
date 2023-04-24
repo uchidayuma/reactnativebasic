@@ -17,6 +17,8 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   Webview: undefined;
+  Signup: undefined;
+  Signin: undefined;
   NotFound: undefined;
 };
 
@@ -29,6 +31,8 @@ export type RootTabParamList = {
   Home: undefined;
   Create: undefined;
   Setting: undefined;
+  Signup: undefined;
+  Signin: undefined;
   Webview: undefined;
 };
 
