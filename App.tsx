@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Appbar } from 'react-native-paper';
 import Purchases from 'react-native-purchases';
 
+import AuthProvider from './contexts/AuthProvider';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Colors from './constants/Colors';
@@ -39,13 +40,15 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Appbar.Header style={styles.appbar}>
-          <Appbar.Action icon="book" color={Colors[colorScheme].text} onPress={() => {}} />
-          <Appbar.Content color={Colors[colorScheme].text} title="TapDiary" />
-        </Appbar.Header>
-        <Navigation colorScheme={colorScheme} />
-      </SafeAreaProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <Appbar.Header style={styles.appbar}>
+            <Appbar.Action icon="book" color={Colors[colorScheme].text} onPress={() => {}} />
+            <Appbar.Content color={Colors[colorScheme].text} title="TapDiary" />
+          </Appbar.Header>
+          <Navigation colorScheme={colorScheme} />
+        </SafeAreaProvider>
+      </AuthProvider>
     );
   }
 }
