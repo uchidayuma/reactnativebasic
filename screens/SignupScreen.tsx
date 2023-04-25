@@ -42,7 +42,7 @@ export default function SignupScreen({ navigation }: RootTabScreenProps<'Signup'
     try {
       const signupUser = await createUserWithEmailAndPassword(auth, email, password)
       console.log(signupUser);
-      navigation.navigate('Setting');
+      navigation.navigate('Signin');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
