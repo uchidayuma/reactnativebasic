@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Platform, StyleSheet, View, Text } from "react-native";
-import { Button } from "react-native-paper";
+import { Platform, StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
+import { Button, HelperText, TextInput } from "react-native-paper";
 
 import useColorScheme from "../hooks/useColorScheme";
 import { RootTabScreenProps } from "../types";
