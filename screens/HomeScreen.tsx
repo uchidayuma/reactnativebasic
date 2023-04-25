@@ -1,11 +1,12 @@
 import { StyleSheet, ScrollView, Image, ImageBackground, RefreshControl } from 'react-native';
 import { Button } from 'react-native-paper';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { gstyle } from '../constants/Styles';
 import useColorScheme from '../hooks/useColorScheme';
 import Colors from '../constants/Colors';
 
 import dayjs from 'dayjs';
+import AuthContext from '../contexts/AuthContext';
 
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -18,6 +19,7 @@ import { Banner } from '../components/Banner';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const colorScheme = useColorScheme();
+  const { user, setUser } = useContext(AuthContext);
   const styles = StyleSheet.create({
     welcome: {
       borderColor: '#FFF',
@@ -74,6 +76,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     // SQLiteから取ってくる処理
     init();
   }, [])
+
+  useEffect( () =>{
+    console.log(user);
+  }, [user])
 
   const init = async() => {
     // SQLiteから最新日記5件を取ってくる

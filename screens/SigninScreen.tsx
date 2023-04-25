@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Platform, StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 
 import useColorScheme from "../hooks/useColorScheme";
 import { RootTabScreenProps } from "../types";
 import { gstyle } from "../constants/Styles";
+import AuthContext from "../contexts/AuthContext";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const auth = getAuth();
 
@@ -12,6 +13,7 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
   const colorScheme = useColorScheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { user, setUser } = useContext(AuthContext);
 
   const isValidEmail = () => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
   const isValidPassword = () => password.length >= 8;
@@ -41,6 +43,7 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
   const handleSignIn = async() => {
     try {
       const signInUser = await signInWithEmailAndPassword(auth, email, password);
+      setUser(signInUser.user);
       console.log(signInUser);
       alert('Success, Signed in successfully');
       navigation.navigate('Home');

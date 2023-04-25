@@ -66,6 +66,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | SignupとSigninスクリーンを作成 | create-signin-screen |
 | Signup機能を実装 | firebase-signup |
 | Signin機能を実装 | firebase-signin |
+| Contextを使ってログイン状態を全てのコンポーネントに渡す | create-context |
 
 
 ## バージョン情報
