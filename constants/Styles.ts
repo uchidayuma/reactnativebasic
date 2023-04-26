@@ -18,6 +18,7 @@ export const gstyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 10
   },
   bgimage: {
     opacity: 1,
