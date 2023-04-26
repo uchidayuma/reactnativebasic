@@ -68,6 +68,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | Signin機能を実装 | firebase-signin |
 | Contextを使ってログイン状態を全てのコンポーネントに渡す | create-context |
 | サインイン状態によってボタンを出し分ける | auth-if |
+| サインアウト機能を実装 | signout |
 
 
 ## バージョン情報
