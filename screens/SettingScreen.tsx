@@ -7,6 +7,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import { RootTabScreenProps } from "../types";
 import { gstyle } from "../constants/Styles";
 import { getAuth, signOut } from "firebase/auth";
+import Colors from "../constants/Colors";
 const auth = getAuth();
 
 // import { BillingModal } from "../components/BillingModal";
@@ -17,6 +18,9 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+    },
+    button : {
+      margin: 15,
     }
   });
 
@@ -34,21 +38,21 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
           <Text>{user.email}</Text>
           {/* <BillingModal /> */}
           {/* firebase signout */}
-          <Button onPress={handleSignout}>Signout</Button>
+          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button} onPress={handleSignout}>Signout</Button>
         </>
       )
     }else{
       return(
         <>
-          <Button onPress={() => navigation.navigate('Signin')}>Signin</Button>
-          <Button onPress={() => navigation.navigate('Signup')}>Signup</Button>
+          <Button mode="contained" buttonColor={Colors[colorScheme].mainColor} style={styles.button} onPress={() => navigation.navigate('Signin')}>Signin</Button>
+          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button} onPress={() => navigation.navigate('Signup')}>Signup</Button>
         </>
       )
     }
   }
 
   return (
-    <View style={styles.container}>
+    <View style={gstyle.bgimage}>
       <Text style={gstyle.heading}>Setting Screen</Text>
       {authSection()}
     </View>

@@ -24,6 +24,6 @@ export default {
     backGroundColor: '#595959',
     accentColor: '#64A2CF',
     vividColor: '#F62A3E',
-    subColor: '#262E3F'
+    subColor: '#D7B17D'
   },
 };

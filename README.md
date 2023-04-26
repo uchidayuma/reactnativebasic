@@ -69,6 +69,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | Contextを使ってログイン状態を全てのコンポーネントに渡す | create-context |
 | サインイン状態によってボタンを出し分ける | auth-if |
 | サインアウト機能を実装 | signout |
+| react-native-paperのカスタムテーマを作成する | react-native-paper-custom |
 
 
 ## バージョン情報

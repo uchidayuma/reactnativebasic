@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Appbar } from 'react-native-paper';
 import Purchases from 'react-native-purchases';
 
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import AuthProvider from './contexts/AuthProvider';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
@@ -23,6 +24,15 @@ export default function App() {
       color: Colors[colorScheme].text
     }
   })
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#D7B17D',
+      // primary: '#D7B17D',
+      accent: '#64A2CF',
+    },
+  };
 
   useEffect( () => {
     rcinit();
@@ -41,13 +51,15 @@ export default function App() {
   } else {
     return (
       <AuthProvider>
-        <SafeAreaProvider>
-          <Appbar.Header style={styles.appbar}>
-            <Appbar.Action icon="book" color={Colors[colorScheme].text} onPress={() => {}} />
-            <Appbar.Content color={Colors[colorScheme].text} title="TapDiary" />
-          </Appbar.Header>
-          <Navigation colorScheme={colorScheme} />
-        </SafeAreaProvider>
+        <PaperProvider theme={theme}>
+          <SafeAreaProvider>
+            <Appbar.Header style={styles.appbar}>
+              <Appbar.Action icon="book" color={Colors[colorScheme].text} onPress={() => {}} />
+              <Appbar.Content color={Colors[colorScheme].text} title="TapDiary" />
+            </Appbar.Header>
+            <Navigation colorScheme={colorScheme} />
+          </SafeAreaProvider>
+        </PaperProvider>
       </AuthProvider>
     );
   }
