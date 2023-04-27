@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Platform, StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import AuthContext from "../contexts/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import useColorScheme from "../hooks/useColorScheme";
 import { RootTabScreenProps } from "../types";
@@ -27,6 +28,7 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
   const handleSignout = async() => {
     await signOut(auth);
     await setUser(null);
+    await AsyncStorage.removeItem('user');
     navigation.navigate('Home');
     alert('Signed out');
   }
