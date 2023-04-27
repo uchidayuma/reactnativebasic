@@ -19,6 +19,7 @@ import CreateScreen from '../screens/CreateScreen';
 import SettingScreen from '../screens/SettingScreen';
 import SignupScreen from '../screens/SignupScreen';
 import SigninScreen from '../screens/SigninScreen';
+import PasswordResetScreen from '../screens/PasswordResetScreen';
 import { WebviewScreen } from '../screens/WebviewScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -46,6 +47,7 @@ function RootNavigator() {
       <Stack.Screen name="Webview" component={WebviewScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: true }} />
       <Stack.Screen name="Signin" component={SigninScreen} options={{ headerShown: true }} />
+      <Stack.Screen name="PasswordReset" component={PasswordResetScreen} options={{ headerShown: true }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />

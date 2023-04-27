@@ -75,6 +75,8 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
           style={styles.input}
         />
         <Button mode="contained" onPress={handleSignIn} style={styles.button} disabled={!isValidEmail() || !isValidPassword()}>Sign In</Button>
+        {/* forgot password */}
+        <Button mode="text" onPress={() => navigation.navigate('PasswordReset')} style={styles.button}>Forgot Password?</Button>
         {/* アカウント持っていない場合 */}
         <Button mode="text" onPress={() => navigation.navigate('Signup')} style={styles.button}>Don't have an account? Sign Up</Button>
       </View>

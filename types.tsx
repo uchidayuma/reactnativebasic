@@ -19,6 +19,7 @@ export type RootStackParamList = {
   Webview: undefined;
   Signup: undefined;
   Signin: undefined;
+  PasswordReset: undefined;
   NotFound: undefined;
 };
 
@@ -33,6 +34,7 @@ export type RootTabParamList = {
   Setting: undefined;
   Signup: undefined;
   Signin: undefined;
+  PasswordReset: undefined;
   Webview: undefined;
 };
 
