@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Platform, StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import useColorScheme from "../hooks/useColorScheme";
 import { RootTabScreenProps } from "../types";
@@ -44,6 +45,7 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
     try {
       const signInUser = await signInWithEmailAndPassword(auth, email, password);
       setUser(signInUser.user);
+      await AsyncStorage.setItem('user', JSON.stringify(signInUser.user));
       console.log(signInUser);
       alert('Success, Signed in successfully');
       navigation.navigate('Home');

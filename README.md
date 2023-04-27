@@ -70,6 +70,8 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | サインイン状態によってボタンを出し分ける | auth-if |
 | サインアウト機能を実装 | signout |
 | react-native-paperのカスタムテーマを作成する | react-native-paper-custom |
+| サインイン情報の永続化 | sign-info-async-storage |
+| パスワードリセット機能の実装 | firebase-password-reset |
 
 
 ## バージョン情報
