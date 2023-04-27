@@ -36,6 +36,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       Webview: 'webview',
       Signup: 'signup',
       Signin: 'signin',
+      PasswordReset: 'passwordreset',
       NotFound: '*',
     },
   },
