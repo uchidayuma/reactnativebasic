@@ -11,7 +11,7 @@ import { getAuth, signOut } from "firebase/auth";
 import Colors from "../constants/Colors";
 const auth = getAuth();
 
-// import { BillingModal } from "../components/BillingModal";
+import { BillingModal } from "../components/BillingModal";
 
 export default function SettingScreen({ navigation }: RootTabScreenProps<'Setting'>) {
   const colorScheme = useColorScheme();
@@ -52,11 +52,20 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
       )
     }
   }
+  const planSection = () => {
+    if(!user){
+      return <Text>Premium plan required Sign up</Text>
+    }else{
+      return <BillingModal /> 
+    }
+  }
 
   return (
     <View style={gstyle.bgimage}>
       <Text style={gstyle.heading}>Setting Screen</Text>
       {authSection()}
+      <Text style={gstyle.heading}>Subscription Plans</Text>
+      {planSection()}
     </View>
   );
 } 

@@ -22,7 +22,8 @@ export const gstyle = StyleSheet.create({
   },
   bgimage: {
     opacity: 1,
-    padding: 10
+    padding: 10,
+    minHeight: '100%',
   },
   mainButton: {
     backgroundColor: '#222837',

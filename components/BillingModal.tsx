@@ -71,7 +71,7 @@ export const BillingModal = () => {
                 <Paragraph style={styles.planTitle}>Please select a monthly or annual plan.</Paragraph>
                 <Paragraph style={styles.planTitle}>ADfree & Backup</Paragraph>
           {plans.map((plan) => (
-                <TouchableOpacity style={styles.planButton} onPress={() => purchaseSubscription(plan)}>
+                <TouchableOpacity style={styles.planButton} onPress={() => purchaseSubscription(plan)} key={plan.identifier}>
                   <Text style={styles.planButtonText}>{plan.product.title}</Text>
                   <Text style={[styles.planButtonText, {textAlign: 'center'}]}>{plan.product.priceString}</Text>
                 </TouchableOpacity>
@@ -84,7 +84,7 @@ export const BillingModal = () => {
           </View>
         </Modal>
       </Portal>
-      <Button onPress={() => setVisible(true)}>Show</Button>
+      <Button onPress={() => setVisible(true)}>Plans Show</Button>
     </Provider>
   );
 };
