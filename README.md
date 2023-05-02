@@ -73,6 +73,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | react-native-paperのカスタムテーマを作成する | react-native-paper-custom |
 | サインイン情報の永続化 | sign-info-async-storage |
 | パスワードリセット機能の実装 | firebase-password-reset |
+| 課金ユーザーを分岐する | is-premium |
 
 
 ## バージョン情報
