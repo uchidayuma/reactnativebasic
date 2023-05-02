@@ -5,6 +5,7 @@ const AuthContext = createContext({
   setUser: () => {},
   isPremium: false,
   setIsPremium: () => {},
+  restoreUser: () => {},
 });
 
 export default AuthContext;
