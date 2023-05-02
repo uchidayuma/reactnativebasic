@@ -14,7 +14,7 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
   const colorScheme = useColorScheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, restoreUser } = useContext(AuthContext);
 
   const isValidEmail = () => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
   const isValidPassword = () => password.length >= 8;
@@ -48,6 +48,7 @@ export default function SigninScreen({ navigation }: RootTabScreenProps<'Signin'
       await AsyncStorage.setItem('user', JSON.stringify(signInUser.user));
       console.log(signInUser);
       alert('Success, Signed in successfully');
+      restoreUser();
       navigation.navigate('Home');
     } catch (error) {
       console.log(error.code, error.message);

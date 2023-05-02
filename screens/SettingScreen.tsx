@@ -15,7 +15,7 @@ import { BillingModal } from "../components/BillingModal";
 
 export default function SettingScreen({ navigation }: RootTabScreenProps<'Setting'>) {
   const colorScheme = useColorScheme();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, restoreUser } = useContext(AuthContext);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -29,6 +29,7 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
     await signOut(auth);
     await setUser(null);
     await AsyncStorage.removeItem('user');
+    restoreUser();
     navigation.navigate('Home');
     alert('Signed out');
   }

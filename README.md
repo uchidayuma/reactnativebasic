@@ -74,6 +74,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | サインイン情報の永続化 | sign-info-async-storage |
 | パスワードリセット機能の実装 | firebase-password-reset |
 | 課金ユーザーを分岐する | is-premium |
+| 課金ユーザーの広告を非表示にする | adoff |
 
 
 ## バージョン情報

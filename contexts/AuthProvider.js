@@ -23,7 +23,11 @@ const AuthProvider = ({ children }) => {
     console.log('rcinit : customerInfo = ', customerInfo);
     
     // if( 月額課金ユーザー or 年額課金ユーザー ) {
-    if ( _.get(customerInfo, 'entitlements.active.monthly.isActive', false) || _.get(customerInfo, 'entitlements.active.annual.isActive', false) ) {
+    const isMontlyActive = _.get(customerInfo, 'entitlements.active.monthly.isActive', false);
+    const isAnnualActive = _.get(customerInfo, 'entitlements.active.annual.isActive', false);
+    console.log('rcinit : isMontlyActive = ', isMontlyActive);
+    console.log('rcinit : isAnnualActive = ', isAnnualActive);
+    if ( isMontlyActive || isAnnualActive ) {
       setIsPremium(true);
     } else {
       setIsPremium(false);
@@ -37,6 +41,9 @@ const AuthProvider = ({ children }) => {
       if (userData) {
         setUser(JSON.parse(userData));
         rcinit(JSON.parse(userData));
+      } else {
+        setUser(null);
+        setIsPremium(false);
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +51,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, isPremium, setIsPremium }}>
+    <AuthContext.Provider value={{ user, setUser, isPremium, setIsPremium, restoreUser }}>
       {children}
     </AuthContext.Provider>
   )
