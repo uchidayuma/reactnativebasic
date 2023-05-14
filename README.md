@@ -79,6 +79,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | SQLiteデータベースのバックアップ | sqlite-backup |
 | jsonをfirebase storageへアップロード | sqlite-backup-upload |
 | SQLiteデータベースの復元 | sqlite-restore |
+| 連打防止など細かい部分を改良 | sqlite-restore-disabled |
 
 
 ## バージョン情報
