@@ -77,6 +77,7 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | 課金ユーザーの広告を非表示にする | adoff |
 | 【Section】SQLiteデータベースのバックアップ機能 |  |
 | SQLiteデータベースのバックアップ | sqlite-backup |
+| jsonをfirebase storageへアップロード | sqlite-backup-upload |
 | SQLiteデータベースの復元 | sqlite-restore |
 
 
