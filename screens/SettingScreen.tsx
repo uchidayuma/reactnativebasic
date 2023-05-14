@@ -18,6 +18,7 @@ import { BillingModal } from "../components/BillingModal";
 export default function SettingScreen({ navigation }: RootTabScreenProps<'Setting'>) {
   const colorScheme = useColorScheme();
   const { user, setUser, isPremium, restoreUser } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -37,11 +38,15 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
   }
 
   const handleBackup = async() => {
+    setIsLoading(true);
     await exportDatabaseToJson(db, user.uid);
+    setIsLoading(false);
     alert('Backup done');
   }
   const handleRestore = async() => {
+    setIsLoading(true);
     await importDatabaseFromJson(db, user.uid);
+    setIsLoading(false);
     alert('Restore done');
   }
 
@@ -75,11 +80,11 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
     if(isPremium || true){
       // return premium user backup button
       return <>
-        <TouchableOpacity onPress={handleBackup}>
-          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button}>Backup</Button>
+        <TouchableOpacity onPress={handleBackup} disabled={isLoading}>
+          <Button mode="contained" disabled={isLoading} loading={isLoading} buttonColor={Colors[colorScheme].subColor} style={styles.button}>Backup</Button>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleRestore}>
-          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button}>Restore</Button>
+        <TouchableOpacity onPress={handleRestore} disabled={isLoading}>
+          <Button mode="contained" disabled={isLoading} loading={isLoading} buttonColor={Colors[colorScheme].subColor} style={styles.button}>Restore</Button>
         </TouchableOpacity>
       </>
     }else{
