@@ -1,8 +1,9 @@
+import { Alert } from "react-native";
 import * as SQLite from "expo-sqlite";
 import dayjs from "dayjs";
 import { storage } from "./firebase";
 import RNFetchBlob from "rn-fetch-blob";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 /**
  * SQLiteと接続
  */
@@ -178,4 +179,35 @@ async function getTableData(db, table) {
       );
     });
   });
+}
+
+export const importDatabaseFromJson = async(db:object, uid) => {
+  try {
+    // download from firebase storage
+    const storageRef = ref(storage, `backups/${uid}.json`);
+    const url = await getDownloadURL(storageRef);
+    const response = await RNFetchBlob.fetch("GET", url);
+    const jsonString = await response.text();
+    const data = JSON.parse(jsonString);
+    console.log(data);
+    const diaries = data.diaries;
+
+    // まず、テーブルをクリアします
+    db.transaction((tx) => {
+      tx.executeSql('DELETE FROM diaries');
+    });
+
+    // JSONデータに含まれるすべてのレコードを挿入します
+    db.transaction((tx) => {
+      diaries.forEach((record) => {
+        console.log(record);
+        
+        tx.executeSql('INSERT INTO diaries (id, body, emoji, feel_id, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?)', [record.id, record.body, record.emoji, record.feel_id, record.updated_at, record.created_at]);
+      });
+    });
+    Alert.alert('restore backup', 'please reload app');
+  } catch (error) {
+    Alert.alert('restore Error');
+    console.log(error);
+  }
 }
