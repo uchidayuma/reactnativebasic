@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Platform, StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
+import { Platform, StyleSheet, View, Text, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 import AuthContext from "../contexts/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,11 +11,13 @@ import { getAuth, signOut } from "firebase/auth";
 import Colors from "../constants/Colors";
 const auth = getAuth();
 
+import { db, exportDatabaseToJson } from "../helpers/sqlite";
+
 import { BillingModal } from "../components/BillingModal";
 
 export default function SettingScreen({ navigation }: RootTabScreenProps<'Setting'>) {
   const colorScheme = useColorScheme();
-  const { user, setUser, restoreUser } = useContext(AuthContext);
+  const { user, setUser, isPremium, restoreUser } = useContext(AuthContext);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -32,6 +34,11 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
     restoreUser();
     navigation.navigate('Home');
     alert('Signed out');
+  }
+
+  const handleBackup = async() => {
+    await exportDatabaseToJson(db, user.uid);
+    alert('Backup done');
   }
 
   const authSection = () => {
@@ -57,7 +64,19 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
     if(!user){
       return <Text>Premium plan required Sign up</Text>
     }else{
-      return <BillingModal /> 
+      // return <BillingModal /> 
+    }
+  }
+  const premiumSection = () => {
+    if(isPremium || true){
+      // return premium user backup button
+      return <>
+        <TouchableOpacity onPress={handleBackup}>
+          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button}>Backup</Button>
+        </TouchableOpacity>
+      </>
+    }else{
+      return <></>
     }
   }
 
@@ -67,6 +86,7 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
       {authSection()}
       <Text style={gstyle.heading}>Subscription Plans</Text>
       {planSection()}
+      {premiumSection()}
     </View>
   );
 } 

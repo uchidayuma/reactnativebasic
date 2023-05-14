@@ -75,6 +75,9 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | パスワードリセット機能の実装 | firebase-password-reset |
 | 課金ユーザーを分岐する | is-premium |
 | 課金ユーザーの広告を非表示にする | adoff |
+| 【Section】SQLiteデータベースのバックアップ機能 |  |
+| SQLiteデータベースのバックアップ | sqlite-backup |
+| SQLiteデータベースの復元 | sqlite-restore |
 
 
 ## バージョン情報

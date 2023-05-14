@@ -1,5 +1,8 @@
 import * as SQLite from "expo-sqlite";
 import dayjs from "dayjs";
+import { storage } from "./firebase";
+import RNFetchBlob from "rn-fetch-blob";
+import { ref, uploadBytes } from "firebase/storage";
 /**
  * SQLiteと接続
  */
@@ -113,4 +116,66 @@ export function select() {
       );
     });
   })
+}
+
+export const exportDatabaseToJson = async(db:object, uid) => {
+  const tables = await getTables(db);
+  const data = {};
+
+  for (const table of tables) {
+    data[table] = await getTableData(db, table);
+  }
+
+  console.log(data);
+  // upload to firebase storage
+  // filename is uid.json
+  const storageRef = ref(storage, `backups/${uid}.json`);
+  const jsonString = JSON.stringify(data);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  uploadBytes(storageRef, blob).then((snapshot) => {
+    console.log(snapshot);
+    console.log("Uploaded a blob or file!");
+  })
+}
+
+async function getTables(db) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table'",
+        [],
+        (_, { rows }) => {
+          const tables = [];
+          for (let i = 0; i < rows.length; i++) {
+            tables.push(rows.item(i).name);
+          }
+          resolve(tables);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+async function getTableData(db, table) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT * FROM ${table}`,
+        [],
+        (_, { rows }) => {
+          const data = [];
+          for (let i = 0; i < rows.length; i++) {
+            data.push(rows.item(i));
+          }
+          resolve(data);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
 }
