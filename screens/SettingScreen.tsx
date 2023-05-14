@@ -11,7 +11,7 @@ import { getAuth, signOut } from "firebase/auth";
 import Colors from "../constants/Colors";
 const auth = getAuth();
 
-import { db, exportDatabaseToJson } from "../helpers/sqlite";
+import { db, exportDatabaseToJson, importDatabaseFromJson } from "../helpers/sqlite";
 
 import { BillingModal } from "../components/BillingModal";
 
@@ -39,6 +39,10 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
   const handleBackup = async() => {
     await exportDatabaseToJson(db, user.uid);
     alert('Backup done');
+  }
+  const handleRestore = async() => {
+    await importDatabaseFromJson(db, user.uid);
+    alert('Restore done');
   }
 
   const authSection = () => {
@@ -73,6 +77,9 @@ export default function SettingScreen({ navigation }: RootTabScreenProps<'Settin
       return <>
         <TouchableOpacity onPress={handleBackup}>
           <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button}>Backup</Button>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleRestore}>
+          <Button mode="contained" buttonColor={Colors[colorScheme].subColor} style={styles.button}>Restore</Button>
         </TouchableOpacity>
       </>
     }else{
