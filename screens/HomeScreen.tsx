@@ -108,7 +108,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     >
       <ImageBackground source={backgroundSource} resizeMode="cover" style={gstyle.bgimage}>
       {/* HTMLで言うと、Sectionや/DIVタグに近い */}
-        <Banner/>
+        {/* <Banner/> */}
         <View style={styles.welcome}>
           <View style={{
             flex: 1,
