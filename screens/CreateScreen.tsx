@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
-import { db, insertDiary, updateDiary } from '../helpers/sqlite';
+import { db, insertDiary, updateDiary, deleteDiary } from '../helpers/sqlite';
 
 import { RootTabScreenProps } from '../types';
 
@@ -74,9 +74,11 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
 
   // propsとして受け取った日記データで状態を初期化
   useEffect(() => {
-    console.log(route.params);
+    console.log(route.params && route.params.diary);
     
     if(route.params && route.params.diary) {
+      console.log('日記編集モード');
+      
       const { body, emoji, feel_id, templates } = route.params.diary;
       setBody(body);
       setSelectedTemplate({ emoji, id: feel_id, templates });  // 仮定: diaryデータがこの形式で来る
@@ -140,6 +142,43 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
       );
     }
   }
+  const onDelete = () => {
+      Alert.alert(
+        "Confirm Delete",
+        "Are you sure you want to delete this item?",
+        [
+          {
+            text: "cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "Yes", onPress: () => deleteItem() }
+        ],
+        { cancelable: true }
+      );
+  }
+  const deleteItem = async() => {
+    const result = await deleteDiary(db, route.params.diary.id);
+    if(result){
+      Alert.alert(
+        "Tap Diary",
+        "Diary deleted",
+        [
+          { text: "OK", onPress: () => navigation.navigate('Home') }
+        ]
+      );
+      setBody('');
+    }else{
+      Alert.alert(
+        "Tap Diary",
+        "Diary delete failed",
+        [
+          { text: "OK", onPress: () => navigation.navigate('Home') }
+        ]
+      );
+    }
+  }
+
 
   return (
     <View style={gstyle.bgimage}>
@@ -170,6 +209,7 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
         placeholder='diary content'
       />
       { isEditMode ?  
+      <>
         <Button style={styles.button} icon="pen" mode="contained"
           buttonColor={Colors[colorScheme].accentColor}
           labelStyle={ {fontSize: 20} }
@@ -177,6 +217,13 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
           onPress={() => onUpdate()}>
             Update Diary
         </Button>
+        <Button style={styles.button} icon="delete" mode="contained"
+          buttonColor={'red'}
+          labelStyle={ {fontSize: 20} }
+          onPress={() => onDelete()}>
+            Delete Diary
+        </Button>
+</>
         :
         <Button style={styles.button} icon="pen" mode="contained"
           buttonColor={Colors[colorScheme].accentColor}

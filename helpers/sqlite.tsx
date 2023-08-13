@@ -154,21 +154,23 @@ export function updateDiary(db, id, body, selectedTemplate) {
  * データを削除
  * @param id - 削除するレコードのID
  */
-export function deleteDiary(id) {
-  db.transaction((tx) => {
-    tx.executeSql(
-      `DELETE FROM diaries WHERE id = ?;`,
-      [id],
-      () => {
-        console.log("delete success");
-        return true;
-      },
-      (error) => {
-        console.log("delete failed");
-        console.log(error);
-        return false;
-      }
-    );
+export function deleteDiary(db, id) {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `DELETE FROM diaries WHERE id = ?;`,
+        [id],
+        () => {
+          console.log("delete success");
+          resolve(true);
+        },
+        (error) => {
+          console.log("delete failed");
+          console.log(error);
+          resolve(false);
+        }
+      );
+    });
   });
 }
 
