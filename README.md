@@ -80,9 +80,9 @@ iOS, Androidストアでリリースしている「TapDiary」初期Verのクロ
 | jsonをfirebase storageへアップロード | sqlite-backup-upload |
 | SQLiteデータベースの復元 | sqlite-restore |
 | 連打防止など細かい部分を改良 | sqlite-restore-disabled |
-| 【Section】firestoreのCRUD |  |
-| firestoreのデータを編集 | firestore-edit |
-| firestoreのデータを削除 | firestore-delete |
+| 【Section】SQLiteのCRUD補足 |  |
+| SQLiteのデータを編集 | sqlite-edit |
+| SQLiteのデータを削除 | sqlite-delete |
 
 
 ## バージョン情報

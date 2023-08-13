@@ -2,7 +2,7 @@ import { Alert } from "react-native";
 import * as SQLite from "expo-sqlite";
 import dayjs from "dayjs";
 import { storage } from "./firebase";
-import RNFetchBlob from "rn-fetch-blob";
+// import RNFetchBlob from "rn-fetch-blob";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 /**
  * SQLiteと接続
@@ -64,6 +64,30 @@ export const insertDiary = (db: object = {}, body: string = '', selectedTemplate
         // return false;
       },
     )
+  });
+}
+
+export function updateDiary(db, id, body, selectedTemplate) {
+  console.log(id, body, selectedTemplate);
+
+  const updatedAt = dayjs().format('YYYY-MM-DD');
+
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `UPDATE diaries SET body = ?, emoji = ?, feel_id = ?, updated_at = ? WHERE id = ?;`,
+        [body, selectedTemplate.emoji, selectedTemplate.id, updatedAt, id],
+        () => {
+          console.log("update success");
+          resolve(true);
+        },
+        (error) => {
+          console.log("update failed");
+          console.log(error);
+          resolve(false);
+        }
+      );
+    });
   });
 }
 

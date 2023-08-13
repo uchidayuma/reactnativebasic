@@ -9,12 +9,15 @@ import Colors from '../constants/Colors';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
-import { db, insertDiary } from '../helpers/sqlite';
+import { db, insertDiary, updateDiary } from '../helpers/sqlite';
 
 import { RootTabScreenProps } from '../types';
 
-export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'>) {
+export default function CreateScreen({ navigation, route }: RootTabScreenProps<'Create'>) {
+  console.log(route.params);
+  
   const colorScheme = useColorScheme();
+  const [isEditMode, setIsEditMode] = useState(false);
   const styles = StyleSheet.create({
     flatlist:{
       maxHeight: '40%',
@@ -71,6 +74,15 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
   }, [])
   // 第2引数にから配列を入れると1度だけ実行
 
+  useEffect(() => {
+    if(route.params && route.params.diary) {
+      const { body, emoji, feel_id, templates } = route.params.diary;
+      setBody(body);
+      setSelectedTemplate({ emoji, id: feel_id, templates });  // 仮定: diaryデータがこの形式で来る
+      setIsEditMode(true);
+    }
+  }, [route.params]);
+
   const getEmojies = async() => {
     const q = query(collection(firestore, "feels"));
     let tmpFeels: string[] = [];
@@ -104,6 +116,29 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
     );
     setBody('');
   }
+  const onUpdate = async() => {
+    const result = await updateDiary(db, route.params.diary.id, body, selectedTemplate);
+    console.log(result);
+    
+    // もし成功したらメッセージを出してHOMEに戻る
+    if(result) {
+      Alert.alert(
+        "Tap Diary",
+        "Diary updated",
+        [
+          { text: "OK", onPress: () => navigation.navigate('Home') }
+        ]
+      );
+    }else{
+      Alert.alert(
+        "Tap Diary",
+        "Diary update failed",
+        [
+          { text: "OK" }
+        ]
+      );
+    }
+  }
 
   return (
     <View style={gstyle.bgimage}>
@@ -133,13 +168,23 @@ export default function CreateScreen({ navigation }: RootTabScreenProps<'Create'
         numberOfLines={3}
         placeholder='diary content'
       />
-      <Button style={styles.button} icon="pen" mode="contained"
-         buttonColor={Colors[colorScheme].accentColor}
-         labelStyle={ {fontSize: 20} }
-         disabled={body.length < 10}
-         onPress={() => onSubmit()}>
-          Write Diary
-      </Button>
+      { isEditMode ? 
+        <Button style={styles.button} icon="pen" mode="contained"
+          buttonColor={Colors[colorScheme].accentColor}
+          labelStyle={ {fontSize: 20} }
+          disabled={body.length < 10}
+          onPress={() => onUpdate()}>
+            Update Diary
+        </Button>
+        :
+        <Button style={styles.button} icon="pen" mode="contained"
+          buttonColor={Colors[colorScheme].accentColor}
+          labelStyle={ {fontSize: 20} }
+          disabled={body.length < 10}
+          onPress={() => onSubmit()}>
+            Write Diary
+        </Button>
+      }
     </View>
   );
 }
