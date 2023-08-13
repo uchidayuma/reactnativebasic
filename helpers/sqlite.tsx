@@ -2,7 +2,7 @@ import { Alert } from "react-native";
 import * as SQLite from "expo-sqlite";
 import dayjs from "dayjs";
 import { storage } from "./firebase";
-import RNFetchBlob from "rn-fetch-blob";
+// import RNFetchBlob from "rn-fetch-blob";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 /**
  * SQLiteと接続
@@ -118,6 +118,60 @@ export function select() {
     });
   })
 }
+
+/**
+ * データを更新
+ * @param id - 更新するレコードのID
+ * @param body - 更新する内容
+ * @param emoji - 更新する絵文字
+ * @param feel_id - 更新する感情ID
+ */
+export function updateDiary(db, id, body, selectedTemplate) {
+  console.log(id, body, selectedTemplate);
+  
+  const updatedAt = dayjs().format('YYYY-MM-DD');
+
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `UPDATE diaries SET body = ?, emoji = ?, feel_id = ?, updated_at = ? WHERE id = ?;`,
+        [body, selectedTemplate.emoji, selectedTemplate.id, updatedAt, id],
+        () => {
+          console.log("update success");
+          resolve(true);
+        },
+        (error) => {
+          console.log("update failed");
+          console.log(error);
+          resolve(false);
+        }
+      );
+    });
+  });
+}
+
+/**
+ * データを削除
+ * @param id - 削除するレコードのID
+ */
+export function deleteDiary(id) {
+  db.transaction((tx) => {
+    tx.executeSql(
+      `DELETE FROM diaries WHERE id = ?;`,
+      [id],
+      () => {
+        console.log("delete success");
+        return true;
+      },
+      (error) => {
+        console.log("delete failed");
+        console.log(error);
+        return false;
+      }
+    );
+  });
+}
+
 
 export const exportDatabaseToJson = async(db:object, uid) => {
   const tables = await getTables(db);
