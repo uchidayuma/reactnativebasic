@@ -91,6 +91,26 @@ export function updateDiary(db, id, body, selectedTemplate) {
   });
 }
 
+export function deleteDiary(db, id) {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `DELETE FROM diaries WHERE id = ?;`,
+        [id],
+        () => {
+          console.log("delete success");
+          resolve(true);
+        },
+        (error) => {
+          console.log("delete failed");
+          console.log(error);
+          resolve(false);
+        }
+      );
+    });
+  });
+};
+
 /**
  * データを登録する
 export function insert(id, name) {
