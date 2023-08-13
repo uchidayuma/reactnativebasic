@@ -1,9 +1,11 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from '../constants/Colors';
 
 export const Diaries = (props: any) => {
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
   const styles = StyleSheet.create({
     time: {
       fontSize: 14,
@@ -25,15 +27,20 @@ export const Diaries = (props: any) => {
     }
   });
   const items: string[] = props.items.map((item: {})=> {
+    const navigateToEditScreen = (item:any) => {
+      navigation.navigate('Create', {diary: item});
+    }
     return(
-      <View key={item.id}>
-        <Text style={styles.time}>{item.created_at}</Text>
-          <Text style={styles.container}>
-            {/* <Text style={styles.body}>{item.created_at}</Text> */}
-            <Text style={styles.emoji}>{item.emoji}</Text>
-            <Text style={styles.body}>{item.body}</Text>
-          </Text>
-      </View>
+      <TouchableOpacity key={item.id} onPress={()=> navigateToEditScreen(item)}>
+        <View>
+          <Text style={styles.time}>{item.created_at}</Text>
+            <Text style={styles.container}>
+              {/* <Text style={styles.body}>{item.created_at}</Text> */}
+              <Text style={styles.emoji}>{item.emoji}</Text>
+              <Text style={styles.body}>{item.body}</Text>
+            </Text>
+        </View>
+      </TouchableOpacity>
     )
   })
 
