@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 
 import { query, collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../helpers/firebase';
-import { db, insertDiary, updateDiary } from '../helpers/sqlite';
+import { db, insertDiary, updateDiary, deleteDiary } from '../helpers/sqlite';
 
 import { RootTabScreenProps } from '../types';
 
@@ -139,6 +139,42 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
       );
     }
   }
+  const onDelete = () => {
+    Alert.alert(
+      "Confirm Delete",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => deleteItem() }
+      ],
+      { cancelable: true }
+    );
+  }
+  const deleteItem = async() => {
+    const result = await deleteDiary(db, route.params.diary.id);
+    console.log(result);
+    if(result) {
+      Alert.alert(
+        "Tap Diary",
+        "Diary deleted",
+        [
+          { text: "OK", onPress: () => navigation.navigate('Home') }
+        ]
+      );
+    }else{
+      Alert.alert(
+        "Tap Diary",
+        "Diary delete failed",
+        [
+          { text: "OK" }
+        ]
+      );
+    }
+  }
 
   return (
     <View style={gstyle.bgimage}>
@@ -169,13 +205,22 @@ export default function CreateScreen({ navigation, route }: RootTabScreenProps<'
         placeholder='diary content'
       />
       { isEditMode ? 
-        <Button style={styles.button} icon="pen" mode="contained"
-          buttonColor={Colors[colorScheme].accentColor}
-          labelStyle={ {fontSize: 20} }
-          disabled={body.length < 10}
-          onPress={() => onUpdate()}>
-            Update Diary
-        </Button>
+        <>
+          <Button style={styles.button} icon="pen" mode="contained"
+            buttonColor={Colors[colorScheme].accentColor}
+            labelStyle={ {fontSize: 20} }
+            disabled={body.length < 10}
+            onPress={() => onUpdate()}>
+              Update Diary
+          </Button>
+          <Button style={styles.button} icon="delete" mode="contained"
+            buttonColor={'red'}
+            labelStyle={ {fontSize: 20} }
+            disabled={body.length < 10}
+            onPress={() => onDelete()}>
+              Delite Diary
+          </Button>
+        </>
         :
         <Button style={styles.button} icon="pen" mode="contained"
           buttonColor={Colors[colorScheme].accentColor}
